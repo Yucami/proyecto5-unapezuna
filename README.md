@@ -4,6 +4,8 @@
 
 🌐 **[Ver en producción → unapezuna.es](https://unapezuna.es)**
 
+[![Deploy to Production](https://github.com/Yucami/proyecto5-unapezuna/actions/workflows/deploy.yml/badge.svg)](https://github.com/Yucami/proyecto5-unapezuna/actions/workflows/deploy.yml)
+
 ---
 
 ## ¿Qué es esto?
@@ -128,6 +130,24 @@ Cognito Post Confirmation → Lambda crear-cliente → DynamoDB
 
 ---
 
+## CI/CD
+
+Cada `git push` a `main` despliega automáticamente a producción vía GitHub Actions:
+
+```
+git push → npm ci → npm run build → aws s3 sync → CloudFront invalidation
+```
+
+- `index.html` se sube con `no-cache`
+- Assets con hash de Vite se suben con `cache-control: immutable` (1 año)
+- Invalidación en ambas distribuciones CloudFront (`unapezuna.es` y `unapezuna.com`)
+- Credenciales AWS gestionadas como GitHub Secrets (nunca en el código)
+- Usuario IAM con permisos mínimos: solo S3 write + CloudFront invalidation
+
+Workflow completo: [`.github/workflows/deploy.yml`](.github/workflows/deploy.yml)
+
+---
+
 ## Coste real en producción
 
 | Servicio | Coste/mes |
@@ -150,4 +170,3 @@ Cognito Post Confirmation → Lambda crear-cliente → DynamoDB
 
 **Yucami** · AWS Certified Solutions Architect Associate  
 [yucami.com](https://yucami.com) · [contacto@yucami.com](mailto:contacto@yucami.com)
-
