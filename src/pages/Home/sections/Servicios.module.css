@@ -1,0 +1,36 @@
+.section { background: var(--cream); padding: var(--section-padding) 0; }
+.inner { max-width: var(--container-max); margin: 0 auto; padding: 0 var(--container-padding); }
+.header { text-align: center; margin-bottom: 64px; display: flex; flex-direction: column; align-items: center; gap: 16px; }
+.label { font-family: var(--font-body); font-size: 0.65rem; font-weight: 700; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); }
+.title { font-family: var(--font-title); font-size: clamp(2.4rem, 5vw, 4rem); font-weight: 900; color: var(--black); line-height: 1.05; text-align: center; }
+.title em { font-style: italic; color: var(--black); }
+.desc { font-family: var(--font-body); font-size: 0.88rem; color: var(--black-secondary); opacity: 0.7; max-width: 360px; text-align: center; }
+.grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; background: rgba(11, 11, 11, 0.08); }
+.card { background: var(--cream); padding: 36px 32px; display: flex; flex-direction: column; gap: 12px; position: relative; transition: background var(--duration) var(--ease); cursor: default; }
+.card:hover { background: var(--black); }
+.card:hover .cardTitle { color: var(--cream); }
+.card:hover .cardDesc { color: var(--gray); }
+.card:hover .duration { color: var(--gray); }
+.card:hover .price { color: var(--gold); }
+.card:hover .price strong { color: var(--gold); }
+.cardTop { display: flex; align-items: flex-start; justify-content: space-between; gap: 8px; }
+.cardTitle { font-family: var(--font-title); font-size: 1.15rem; font-weight: 700; color: var(--black); line-height: 1.2; transition: color var(--duration) var(--ease); }
+.badge { font-size: 0.9rem; flex-shrink: 0; margin-top: 2px; }
+.cardDesc { font-family: var(--font-body); font-size: 0.8rem; color: rgba(11,11,11,0.65); line-height: 1.6; flex: 1; transition: color var(--duration) var(--ease); }
+.cardBottom { display: flex; align-items: center; justify-content: space-between; margin-top: 8px; }
+.cardMeta { display: flex; gap: 12px; align-items: center; }
+.duration { font-family: var(--font-body); font-size: 0.7rem; color: rgba(11,11,11,0.45); letter-spacing: 0.05em; transition: color var(--duration) var(--ease); }
+.price { font-family: var(--font-body); font-size: 0.82rem; color: var(--black-secondary); transition: color var(--duration) var(--ease); }
+.price strong { font-size: 1.1rem; font-weight: 700; color: var(--black); transition: color var(--duration) var(--ease); }
+.cardLine { height: 2px; width: 32px; background: var(--gold); opacity: 0.4; transition: background var(--duration) var(--ease), width 0.4s var(--ease), opacity var(--duration); }
+.card:hover .cardLine { opacity: 1; width: 100%; }
+.loading { display: flex; justify-content: center; padding: 80px 0; }
+.spinner { width: 36px; height: 36px; border: 2px solid rgba(198, 169, 107, 0.2); border-top-color: var(--gold); border-radius: 50%; animation: spin 0.8s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+.cta { display: flex; align-items: center; justify-content: center; gap: 32px; margin-top: 64px; flex-wrap: wrap; }
+.ctaBtn { padding: 16px 40px; background: var(--black); color: var(--gold); border: 1px solid var(--black); font-family: var(--font-body); font-size: 0.72rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; transition: background var(--duration) var(--ease), color var(--duration) var(--ease); }
+.ctaBtn:hover { background: var(--gold); color: var(--black); border-color: var(--gold); }
+.ctaSecondary { font-family: var(--font-body); font-size: 0.78rem; color: var(--black); opacity: 0.5; text-decoration: underline; text-underline-offset: 4px; transition: opacity var(--duration); }
+.ctaSecondary:hover { opacity: 1; }
+@media (max-width: 900px) { .grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 560px) { .grid { grid-template-columns: 1fr; } .cta { flex-direction: column; gap: 16px; } }

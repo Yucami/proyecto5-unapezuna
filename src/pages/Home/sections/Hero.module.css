@@ -1,0 +1,207 @@
+/* Fuentes del proyecto — cargadas aquí para el Hero */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@900&family=Pinyon+Script&family=Montserrat:wght@300;400;600;700&display=swap');
+
+/* ============================================
+   HERO — UñaPezuña
+   ============================================ */
+
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: #0B0B0B;
+  overflow: hidden;
+  padding-top: calc(var(--nav-height) + 28px);
+}
+
+/* Canvas de humo — cubre todo el hero, detrás del contenido */
+.smokeCanvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+  filter: blur(15px);
+}
+
+/* ── Layout ── */
+.inner {
+  flex: 1;
+  position: relative;
+  z-index: 2;
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: 0 var(--container-padding);
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 48px;
+  min-height: calc(100vh - var(--nav-height) - 28px);
+}
+
+/* ── Columna izquierda: logo + CTA ── */
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  z-index: 1;
+  animation: fadeSlideUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes fadeSlideUp {
+  from { opacity: 0; transform: translateY(28px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.overline {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: #C6A96B;
+}
+
+/* Imagen PNG del logotipo — reemplaza al título de texto */
+.logoText {
+  width: 100%;
+  max-width: 560px;
+  height: auto;
+  display: block;
+  mix-blend-mode: lighten;
+  filter: drop-shadow(0 0 30px rgba(198,169,107,0.25));
+  animation: fadeSlideUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* ── CTA ── */
+.actions { display: flex; align-items: center; gap: 20px; margin-top: 52px; }
+
+.ctaBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 36px;
+  border: 1px solid #C6A96B;
+  color: #C6A96B;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  transition: background 0.3s ease, color 0.3s ease, transform 0.2s ease;
+  background: transparent;
+  cursor: pointer;
+}
+.ctaBtn:hover { background: #C6A96B; color: #0B0B0B; transform: translateY(-2px); }
+.arrow { transition: transform 0.3s ease; }
+.ctaBtn:hover .arrow { transform: translateX(4px); }
+
+/* ── Columna derecha: imagen del halo ── */
+.imageCol {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+  margin-top: -80px;
+}
+
+.clawImg {
+  width: 100%;
+  max-width: 680px;
+  height: auto;
+  display: block;
+  user-select: none;
+  pointer-events: none;
+  mix-blend-mode: lighten;
+  filter: drop-shadow(0 0 50px rgba(198,169,107,0.28))
+          drop-shadow(0 0 100px rgba(198,169,107,0.10));
+  animation:
+    fadeIn 1.2s cubic-bezier(0.4, 0, 0.2, 1) 0.3s both,
+    float  6s  ease-in-out infinite 1.5s;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* Flotación suave continua de la imagen del halo */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-12px); }
+}
+
+/* ── Indicador de scroll ── */
+.scrollHint {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  justify-content: center;
+  padding: 28px 0 20px;
+}
+.scrollLine {
+  width: 1px;
+  height: 44px;
+  background: linear-gradient(to bottom, #C6A96B, transparent);
+  animation: scrollPulse 2s ease-in-out infinite;
+}
+@keyframes scrollPulse {
+  0%, 100% { opacity: 0.2; transform: scaleY(0.8); }
+  50%       { opacity: 0.8; transform: scaleY(1); }
+}
+
+/* ── Responsive ── */
+@media (max-width: 900px) {
+  .inner {
+    grid-template-columns: 1fr;
+    text-align: center;
+    padding-top: 48px;
+    padding-bottom: 48px;
+  }
+  .actions  { justify-content: center; }
+  .imageCol { order: -1; }
+  .clawImg  { max-width: 320px; }
+}
+
+@media (max-width: 480px) {
+  /* Clases sin elemento activo en Hero.jsx — restos de versión anterior donde
+     el título era texto en lugar de imagen PNG. Mantener hasta confirmar que
+     no se van a recuperar. */
+  .titleUna    { font-size: clamp(3rem, 14vw, 4.5rem); }
+  .titlePezuna { font-size: clamp(2.6rem, 13vw, 4rem); }
+  .featureDivider { display: none; }
+  .feature { min-width: 60px; }
+}
+
+/* Gradiente superior — tapa el corte superior de hero-claw.png con el borde del nav.
+   En mobile la imagen sube y el corte es más visible, por eso
+   se aumenta la altura y el porcentaje de zona sólida en los breakpoints. */
+.hero::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 340px;
+  background: linear-gradient(to bottom, #0B0B0B 0%, #0B0B0B 45%, transparent 100%);
+  z-index: 3;
+  pointer-events: none;
+}
+
+@media (max-width: 900px) {
+  .hero::after {
+    height: 280px;
+    background: linear-gradient(to bottom, #0B0B0B 0%, #0B0B0B 45%, transparent 100%);
+  }
+}
+
+@media (max-width: 480px) {
+  .hero::after {
+    height: 240px;
+    background: linear-gradient(to bottom, #0B0B0B 0%, #0B0B0B 40%, transparent 100%);
+  }
+}

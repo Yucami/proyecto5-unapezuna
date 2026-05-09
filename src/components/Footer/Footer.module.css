@@ -1,0 +1,139 @@
+.footer {
+  background: var(--black);
+  border-top: 1px solid rgba(198, 169, 107, 0.2);
+  margin-top: auto;
+}
+
+/* Barra inferior estilo mockup */
+.topDecor {
+  background: var(--black-secondary);
+  border-top: 1px solid rgba(198, 169, 107, 0.15);
+  border-bottom: 1px solid rgba(198, 169, 107, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  padding: 12px 0;
+  font-family: var(--font-body);
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gray);
+  flex-wrap: wrap;
+}
+
+.star { color: var(--gold); opacity: 0.6; }
+.brand, .slogan, .tagline { color: var(--gray); }
+
+.main {
+  padding: 64px 0 48px;
+}
+
+.inner {
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: 0 var(--container-padding);
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr 1.2fr;
+  gap: 48px;
+}
+
+/* Logo en footer */
+.logoBlock {
+  display: flex;
+  flex-direction: column;
+  line-height: 1;
+  margin-bottom: 16px;
+}
+
+.logoUna {
+  font-family: var(--font-title);
+  font-size: 1rem;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+  color: var(--cream);
+}
+
+.logoPezuna {
+  font-family: var(--font-script);
+  font-size: 1.4rem;
+  color: var(--gold);
+}
+
+.taglineText {
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  color: var(--gray);
+  font-style: italic;
+  margin-bottom: 6px;
+}
+
+.location {
+  font-size: 0.72rem;
+  color: rgba(216, 210, 200, 0.5);
+  letter-spacing: 0.08em;
+}
+
+/* Columnas */
+.colTitle {
+  font-family: var(--font-body);
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 20px;
+}
+
+.footerNav {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.footerNav a,
+.footerNav span {
+  font-size: 0.8rem;
+  color: var(--gray);
+  transition: color var(--duration) var(--ease);
+  cursor: pointer;
+}
+
+.footerNav a:hover {
+  color: var(--gold);
+}
+
+.footerCta {
+  display: inline-block;
+  margin-top: 20px;
+  font-family: var(--font-body);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  color: var(--gold);
+  border-bottom: 1px solid var(--gold);
+  padding-bottom: 3px;
+  transition: opacity var(--duration) var(--ease);
+}
+
+.footerCta:hover { opacity: 0.7; }
+
+/* Responsive */
+@media (max-width: 900px) {
+  .inner {
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+  }
+}
+
+@media (max-width: 520px) {
+  .inner {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  .topDecor {
+    gap: 12px;
+  }
+}

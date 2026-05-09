@@ -1,0 +1,293 @@
+/* ── layout ── */
+.page        { min-height: 100vh; background: var(--black); padding-top: calc(var(--nav-height) + 48px); padding-bottom: 80px; }
+.container   { max-width: 900px; margin: 0 auto; padding: 0 var(--container-padding); }
+.loading     { min-height: 100vh; display: flex; align-items: center; justify-content: center; }
+
+/* ── header ── */
+.header   { margin-bottom: 40px; }
+.label    { font-family: var(--font-body); font-size: 0.65rem; font-weight: 700; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); display: block; margin-bottom: 12px; }
+.title    { font-family: var(--font-title); font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 900; color: var(--cream); line-height: 1.05; }
+.subtitle { font-family: var(--font-body); font-size: 0.85rem; color: var(--gray); margin-top: 8px; }
+
+/* ── tabs ── */
+.tabs     { display: flex; border-bottom: 1px solid rgba(198,169,107,0.15); margin-bottom: 40px; }
+.tab      { padding: 14px 28px; font-family: var(--font-body); font-size: 0.68rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gray); background: none; border: none; border-bottom: 2px solid transparent; cursor: pointer; transition: color var(--duration) var(--ease), border-color var(--duration) var(--ease); margin-bottom: -1px; }
+.tab:hover { color: var(--cream); }
+.tabActive { color: var(--gold) !important; border-bottom-color: var(--gold) !important; }
+
+/* ── content ── */
+.content    { width: 100%; }
+.tabContent { display: flex; flex-direction: column; gap: 28px; }
+.tabDesc    { font-family: var(--font-body); font-size: 0.82rem; color: var(--gray); line-height: 1.6; max-width: 560px; }
+
+/* ── calendario — cabecera ── */
+.calHeader { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+.calNav    { width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; background: none; border: 1px solid rgba(198,169,107,0.2); color: var(--gold); font-size: 0.9rem; cursor: pointer; transition: background var(--duration) var(--ease), border-color var(--duration) var(--ease); flex-shrink: 0; }
+.calNav:hover    { background: rgba(198,169,107,0.08); border-color: var(--gold); }
+.calNav:disabled { opacity: 0.3; cursor: not-allowed; }
+.calMes    { font-family: var(--font-title); font-size: 1.15rem; font-weight: 700; color: var(--cream); display: flex; align-items: center; gap: 10px; }
+.calSpinner { width: 12px; height: 12px; border: 1.5px solid rgba(198,169,107,0.3); border-top-color: var(--gold); border-radius: 50%; animation: spin 0.7s linear infinite; display: inline-block; }
+
+/* ── leyenda ── */
+.leyenda { display: flex; gap: 20px; flex-wrap: wrap; }
+.leyItem { display: flex; align-items: center; gap: 7px; font-family: var(--font-body); font-size: 0.68rem; color: var(--gray); letter-spacing: 0.04em; }
+.leyDot  { width: 10px; height: 10px; border-radius: 50%; display: inline-block; flex-shrink: 0; font-style: normal; }
+.dotVerde { background: rgba(126,200,138,0.85); }
+.dotRojo  { background: rgba(224,112,112,0.85); }
+.dotGris  { background: rgba(216,210,200,0.2); border: 1px solid rgba(216,210,200,0.25); }
+
+/* ── grilla del calendario ── */
+.calGrid    { display: grid; grid-template-columns: repeat(7, 1fr); gap: 3px; }
+.calDiaSem  { font-family: var(--font-body); font-size: 0.6rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--gray); text-align: center; padding: 8px 0 12px; opacity: 0.45; }
+
+.calDia {
+  position: relative;
+  aspect-ratio: 1 / 1.15;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  background: none;
+  border: 1px solid transparent;
+  cursor: default;
+  transition: border-color var(--duration) var(--ease), background var(--duration) var(--ease);
+  padding: 4px 2px;
+}
+.calDia:disabled          { opacity: 0.22; cursor: default; }
+.calDia:not(:disabled)    { cursor: pointer; }
+.calDia:not(:disabled):hover { border-color: rgba(198,169,107,0.35); background: rgba(198,169,107,0.05); }
+
+.calNum   { font-family: var(--font-body); font-size: 0.8rem; font-weight: 600; color: var(--cream); line-height: 1; }
+.calCount { font-family: var(--font-body); font-size: 0.5rem; color: rgba(216,210,200,0.5); line-height: 1; }
+
+/* colores de disponibilidad */
+.diaVerde                    { background: rgba(126,200,138,0.1) !important; border-color: rgba(126,200,138,0.25) !important; }
+.diaVerde .calNum            { color: #a3d9ab; }
+.diaVerde:not(:disabled):hover { background: rgba(126,200,138,0.18) !important; }
+
+.diaRojo                     { background: rgba(224,112,112,0.1) !important; border-color: rgba(224,112,112,0.2) !important; }
+.diaRojo .calNum             { color: #e07070; }
+.diaRojo:not(:disabled):hover { background: rgba(224,112,112,0.16) !important; }
+
+/* modificadores de día */
+.diaPasado { opacity: 0.3; }
+.diaHoy .calNum { color: var(--gold); font-weight: 700; }
+.diaHoy    { border-color: rgba(198,169,107,0.45) !important; }
+
+.diaSel    { border-color: var(--gold) !important; background: rgba(198,169,107,0.1) !important; }
+.diaSel .calNum { color: var(--gold); font-weight: 700; }
+
+/* ── panel de citas del día ── */
+.panelCitas { border: 1px solid rgba(198,169,107,0.15); background: rgba(255,255,255,0.015); }
+.panelHead  { display: flex; align-items: flex-start; justify-content: space-between; padding: 24px 24px 16px; border-bottom: 1px solid rgba(198,169,107,0.08); }
+.panelTit   { font-family: var(--font-title); font-size: 1.05rem; font-weight: 700; color: var(--cream); text-transform: capitalize; }
+.panelClose { background: none; border: none; color: var(--gray); font-size: 0.9rem; cursor: pointer; padding: 4px 8px; transition: color var(--duration); }
+.panelClose:hover { color: var(--cream); }
+
+.spinnerSm  { width: 22px; height: 22px; border: 2px solid rgba(198,169,107,0.2); border-top-color: var(--gold); border-radius: 50%; animation: spin 0.7s linear infinite; margin: 24px auto; display: block; }
+
+/* ── lista de citas ── */
+.citasList  { display: flex; flex-direction: column; gap: 1px; padding: 16px 24px; }
+.citaRow    { display: flex; align-items: center; gap: 16px; padding: 14px 16px; background: var(--black-secondary); border: 1px solid rgba(198,169,107,0.06); cursor: pointer; transition: border-color var(--duration) var(--ease), background var(--duration) var(--ease); }
+.citaRow:hover { border-color: rgba(198,169,107,0.2); background: rgba(255,255,255,0.04); }
+
+.citaHora   { font-family: var(--font-title); font-size: 1.05rem; font-weight: 700; color: var(--gold); flex-shrink: 0; width: 50px; }
+.citaInfo   { flex: 1; display: flex; flex-direction: column; gap: 3px; min-width: 0; }
+.citaInfo strong { font-family: var(--font-body); font-size: 0.85rem; color: var(--cream); font-weight: 600; }
+.citaInfo span   { font-family: var(--font-body); font-size: 0.72rem; color: var(--gray); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.citaEmail  { font-size: 0.65rem !important; opacity: 0.45; }
+.citaDerecha { display: flex; flex-direction: column; align-items: flex-end; gap: 6px; flex-shrink: 0; }
+.citaArrow  { font-size: 0.72rem; color: rgba(198,169,107,0.45); transition: color var(--duration); }
+.citaRow:hover .citaArrow { color: var(--gold); }
+
+/* ── badges ── */
+.badge      { font-family: var(--font-body); font-size: 0.58rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; padding: 3px 8px; }
+.confirmada { background: rgba(126,200,138,0.12); color: #7ec88a; border: 1px solid rgba(126,200,138,0.25); }
+.pendiente  { background: rgba(216,210,200,0.08); color: var(--gray); border: 1px solid rgba(216,210,200,0.15); }
+.cancelada  { background: rgba(224,112,112,0.12); color: #e07070; border: 1px solid rgba(224,112,112,0.25); }
+.completada { background: rgba(198,169,107,0.12); color: var(--gold); border: 1px solid rgba(198,169,107,0.25); }
+
+/* ── modal historial clienta ── */
+.overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.78); z-index: 200; display: flex; align-items: flex-end; justify-content: center; padding: 0; }
+@media (min-width: 640px) { .overlay { align-items: center; padding: 20px; } }
+
+.modal { background: #111111; border: 1px solid rgba(198,169,107,0.18); width: 100%; max-width: 580px; max-height: 90vh; overflow-y: auto; display: flex; flex-direction: column; }
+
+.modalHead    { display: flex; align-items: flex-start; justify-content: space-between; padding: 28px 28px 20px; border-bottom: 1px solid rgba(198,169,107,0.1); gap: 16px; }
+.modalInfo    { flex: 1; }
+.modalLbl     { font-family: var(--font-body); font-size: 0.6rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); display: block; margin-bottom: 8px; }
+.modalNombre  { font-family: var(--font-title); font-size: 1.4rem; font-weight: 700; color: var(--cream); margin-bottom: 8px; }
+.modalContacto       { display: flex; flex-direction: column; gap: 4px; }
+.modalContacto span  { font-family: var(--font-body); font-size: 0.72rem; color: var(--gray); }
+.modalClose   { background: none; border: none; color: var(--gray); font-size: 1rem; cursor: pointer; padding: 4px 8px; flex-shrink: 0; transition: color var(--duration); }
+.modalClose:hover { color: var(--cream); }
+
+.modalStats { display: grid; grid-template-columns: repeat(4, 1fr); padding: 20px 28px; border-bottom: 1px solid rgba(198,169,107,0.1); }
+.statBox    { display: flex; flex-direction: column; align-items: center; gap: 4px; }
+.statNum    { font-family: var(--font-title); font-size: 1.7rem; font-weight: 700; color: var(--cream); line-height: 1; }
+.statRojo   { color: #e07070; }
+.statLbl    { font-family: var(--font-body); font-size: 0.6rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gray); }
+
+.modalLista { padding: 16px 28px 28px; display: flex; flex-direction: column; gap: 2px; }
+.modalRow   { display: flex; align-items: center; gap: 14px; padding: 12px 14px; background: rgba(255,255,255,0.02); border: 1px solid rgba(198,169,107,0.06); }
+.modalFecha { display: flex; flex-direction: column; align-items: center; min-width: 70px; flex-shrink: 0; }
+.modalFecha span { font-family: var(--font-body); font-size: 0.7rem; color: var(--gray); }
+.modalHora  { color: var(--gold) !important; font-weight: 600; }
+.modalSvc   { flex: 1; display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.modalSvc strong { font-family: var(--font-body); font-size: 0.8rem; color: var(--cream); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.modalSvc span   { font-family: var(--font-body); font-size: 0.7rem; color: var(--gray); }
+
+/* ── formularios (huecos / bloquear) ── */
+.formGrid   { display: flex; gap: 16px; flex-wrap: wrap; }
+.field      { display: flex; flex-direction: column; gap: 6px; min-width: 160px; }
+.fieldLabel { font-family: var(--font-body); font-size: 0.62rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gray); }
+.dateInput  { background: rgba(255,255,255,0.04); border: 1px solid rgba(198,169,107,0.25); color: var(--cream); font-family: var(--font-body); font-size: 0.88rem; padding: 10px 14px; outline: none; transition: border-color var(--duration) var(--ease); cursor: pointer; }
+.dateInput:focus { border-color: var(--gold); }
+.dateInput option { background: var(--black-secondary); color: var(--cream); }
+.dateInput::-webkit-calendar-picker-indicator { filter: invert(0.6) sepia(1) saturate(2) hue-rotate(5deg); }
+
+.exito         { font-family: var(--font-body); font-size: 0.82rem; color: #7ec88a; padding: 14px 16px; background: rgba(126,200,138,0.08); border: 1px solid rgba(126,200,138,0.2); }
+.huecosCreados { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+.huecoBadge    { font-family: var(--font-body); font-size: 0.72rem; font-weight: 600; color: var(--gold); border: 1px solid rgba(198,169,107,0.25); padding: 4px 10px; }
+
+.btnAccion { padding: 14px 36px; border: 1px solid var(--gold); background: transparent; color: var(--gold); font-family: var(--font-body); font-size: 0.72rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; cursor: pointer; transition: background var(--duration) var(--ease), color var(--duration) var(--ease); display: flex; align-items: center; justify-content: center; min-height: 48px; min-width: 180px; align-self: flex-start; }
+.btnAccion:hover:not(:disabled) { background: var(--gold); color: var(--black); }
+.btnAccion:disabled { opacity: 0.35; cursor: not-allowed; }
+.btnBloquear { border-color: #e07070; color: #e07070; }
+.btnBloquear:hover:not(:disabled) { background: #e07070; color: var(--black); }
+
+/* ── mensajes ── */
+.error    { font-family: var(--font-body); font-size: 0.78rem; color: #e07070; padding: 12px 16px; background: rgba(224,112,112,0.08); border: 1px solid rgba(224,112,112,0.2); }
+.exitoMsg { font-family: var(--font-body); font-size: 0.82rem; color: #7ec88a; padding: 12px 16px; background: rgba(126,200,138,0.08); border: 1px solid rgba(126,200,138,0.2); }
+.vacio    { font-family: var(--font-body); font-size: 0.82rem; color: var(--gray); padding: 28px 0; text-align: center; }
+.cargando { font-family: var(--font-body); font-size: 0.75rem; color: var(--gray); font-style: italic; }
+
+/* ── spinners ── */
+.spinner        { width: 32px; height: 32px; border: 2px solid rgba(198,169,107,0.2); border-top-color: var(--gold); border-radius: 50%; animation: spin 0.7s linear infinite; margin: 60px auto; display: block; }
+.spinnerInline  { width: 16px; height: 16px; border: 2px solid rgba(198,169,107,0.3); border-top-color: var(--gold); border-radius: 50%; animation: spin 0.7s linear infinite; display: inline-block; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ── responsive ── */
+@media (max-width: 640px) {
+  .tabs         { overflow-x: auto; }
+  .tab          { padding: 12px 16px; white-space: nowrap; }
+  .calGrid      { gap: 2px; }
+  .calNum       { font-size: 0.7rem; }
+  .calCount     { display: none; }
+  .citaRow      { gap: 10px; }
+  .citasList    { padding: 12px 16px; }
+  .modalStats   { grid-template-columns: repeat(2, 1fr); gap: 16px; padding: 16px; }
+  .modalHead    { padding: 20px 16px; }
+  .modalLista   { padding: 12px 16px 20px; }
+  .modal        { max-height: 92vh; }
+}
+
+/* ── panel huecos: cabecera con resumen ── */
+.panelHeadLeft  { display: flex; flex-direction: column; gap: 6px; }
+.panelResumen   { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.resumenSep     { color: rgba(216,210,200,0.25); font-size: 0.7rem; }
+.resumenLibre   { font-family: var(--font-body); font-size: 0.68rem; color: #7ec88a; font-weight: 600; }
+.resumenOcup    { font-family: var(--font-body); font-size: 0.68rem; color: #e07070; font-weight: 600; }
+.resumenBloq    { font-family: var(--font-body); font-size: 0.68rem; color: var(--gray); font-weight: 600; }
+
+/* ── variantes de fila por estado ── */
+.huecLibre  { opacity: 0.45; cursor: default !important; }
+.huecLibre:hover { border-color: rgba(126,200,138,0.15) !important; background: rgba(126,200,138,0.03) !important; }
+
+.huecBloq   { opacity: 0.5; cursor: default !important; }
+.huecBloq:hover { border-color: rgba(216,210,200,0.1) !important; background: none !important; }
+
+.huecReserv { opacity: 1; }
+
+/* ── labels de estado ── */
+.libreLabel { color: rgba(126,200,138,0.6) !important; font-weight: 400 !important; font-style: italic; }
+.bloqLabel  { color: rgba(216,210,200,0.4) !important; font-weight: 400 !important; font-style: italic; }
+
+.badgeLibre { font-family: var(--font-body); font-size: 0.58rem; font-weight: 700; letter-spacing: 0.08em; padding: 3px 8px; background: rgba(126,200,138,0.08); color: rgba(126,200,138,0.5); border: 1px solid rgba(126,200,138,0.15); }
+.badgeBloq  { font-family: var(--font-body); font-size: 0.58rem; font-weight: 700; letter-spacing: 0.08em; padding: 3px 8px; background: rgba(216,210,200,0.04); color: rgba(216,210,200,0.3); border: 1px solid rgba(216,210,200,0.1); }
+
+/* ── panel cabecera con botón añadir ── */
+.panelHeadRight   { display: flex; align-items: center; gap: 12px; flex-shrink: 0; }
+.panelHeadLeft    { display: flex; flex-direction: column; gap: 6px; }
+.panelResumen     { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.resumenSep       { color: rgba(216,210,200,0.25); font-size: 0.7rem; }
+.resumenLibre     { font-family: var(--font-body); font-size: 0.68rem; color: #7ec88a; font-weight: 600; }
+.resumenOcup      { font-family: var(--font-body); font-size: 0.68rem; color: #e07070; font-weight: 600; }
+.resumenBloq      { font-family: var(--font-body); font-size: 0.68rem; color: var(--gray); font-weight: 600; }
+
+.btnCrearHuecos   { padding: 7px 16px; border: 1px solid rgba(198,169,107,0.35); background: transparent; color: var(--gold); font-family: var(--font-body); font-size: 0.62rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer; transition: background var(--duration) var(--ease), border-color var(--duration) var(--ease); white-space: nowrap; }
+.btnCrearHuecos:hover { background: rgba(198,169,107,0.08); border-color: var(--gold); }
+
+/* ── formulario crear huecos inline ── */
+.crearForm   { padding: 20px 24px; border-bottom: 1px solid rgba(198,169,107,0.08); background: rgba(198,169,107,0.03); }
+.crearDesc   { font-family: var(--font-body); font-size: 0.78rem; color: var(--gray); margin-bottom: 16px; line-height: 1.5; }
+.crearDesc strong { color: var(--cream); }
+.crearFields { display: flex; align-items: flex-end; gap: 16px; flex-wrap: wrap; }
+
+/* ── botón bloquear inline por hueco ── */
+.btnBloquearInline { padding: 4px 10px; border: 1px solid rgba(224,112,112,0.3); background: transparent; color: rgba(224,112,112,0.6); font-family: var(--font-body); font-size: 0.6rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; cursor: pointer; transition: background var(--duration) var(--ease), color var(--duration) var(--ease), border-color var(--duration) var(--ease); }
+.btnBloquearInline:hover:not(:disabled) { background: rgba(224,112,112,0.1); color: #e07070; border-color: rgba(224,112,112,0.5); }
+.btnBloquearInline:disabled { opacity: 0.35; cursor: not-allowed; }
+
+/* ── variantes de fila ── */
+.huecLibre            { opacity: 0.5; }
+.huecLibre:hover      { border-color: rgba(126,200,138,0.15) !important; background: rgba(126,200,138,0.03) !important; }
+.huecBloq             { opacity: 0.4; cursor: default !important; }
+.huecBloq:hover       { border-color: transparent !important; background: none !important; }
+.huecReserv           { opacity: 1; }
+
+.libreLabel  { color: rgba(126,200,138,0.55) !important; font-weight: 400 !important; font-style: italic; }
+.bloqLabel   { color: rgba(216,210,200,0.35) !important; font-weight: 400 !important; font-style: italic; }
+
+.badgeLibre  { font-family: var(--font-body); font-size: 0.58rem; font-weight: 700; letter-spacing: 0.08em; padding: 3px 8px; background: rgba(126,200,138,0.07); color: rgba(126,200,138,0.45); border: 1px solid rgba(126,200,138,0.12); }
+.badgeBloq   { font-family: var(--font-body); font-size: 0.58rem; font-weight: 700; letter-spacing: 0.08em; padding: 3px 8px; background: rgba(216,210,200,0.04); color: rgba(216,210,200,0.25); border: 1px solid rgba(216,210,200,0.08); }
+
+/* ── stats mensuales ── */
+.statsMes    { display: grid; grid-template-columns: repeat(5, 1fr); gap: 2px; background: rgba(198,169,107,0.06); border: 1px solid rgba(198,169,107,0.1); }
+.statMesBox  { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; padding: 16px 8px; background: var(--black); }
+.statMesNum  { font-family: var(--font-title); font-size: 1.6rem; font-weight: 700; line-height: 1; }
+.statMesLbl  { font-family: var(--font-body); font-size: 0.58rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gray); opacity: 0.6; }
+
+.statDorado  { color: var(--gold); }
+.statRojo    { color: #e07070; }
+.statGris    { color: var(--gray); }
+.statApagado { color: rgba(216,210,200,0.3); }
+
+@media (max-width: 500px) {
+  .statsMes { grid-template-columns: repeat(3, 1fr); }
+}
+
+/* ── fotos en historial ── */
+.modalRowTop     { display: flex; align-items: center; gap: 14px; width: 100%; }
+.modalRowDerecha { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
+
+.btnSubirFoto {
+  width: 28px; height: 28px;
+  display: flex; align-items: center; justify-content: center;
+  border: 1px solid rgba(198,169,107,0.25);
+  cursor: pointer; font-size: 0.85rem;
+  transition: background var(--duration) var(--ease), border-color var(--duration) var(--ease);
+  flex-shrink: 0;
+}
+.btnSubirFoto:hover { background: rgba(198,169,107,0.08); border-color: var(--gold); }
+
+.fotosRow {
+  display: flex; flex-wrap: wrap; gap: 8px;
+  padding-top: 10px; margin-top: 10px;
+  border-top: 1px solid rgba(198,169,107,0.06);
+  width: 100%;
+}
+
+.fotoThumb {
+  width: 72px; height: 72px;
+  display: block; overflow: hidden;
+  border: 1px solid rgba(198,169,107,0.15);
+  flex-shrink: 0;
+  transition: border-color var(--duration) var(--ease);
+}
+.fotoThumb:hover { border-color: var(--gold); }
+.fotoThumb img   { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+.btnRegistrarInline { padding: 4px 10px; border: 1px solid rgba(198,169,107,0.3); background: transparent; color: var(--gold); font-family: var(--font-body); font-size: 0.6rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; cursor: pointer; transition: background var(--duration) var(--ease), border-color var(--duration) var(--ease); }
+.btnRegistrarInline:hover { background: rgba(198,169,107,0.1); border-color: var(--gold); }

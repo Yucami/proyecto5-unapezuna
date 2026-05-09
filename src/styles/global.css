@@ -1,0 +1,150 @@
+/* ============================================
+   UÑAPEZUÑA — Global CSS
+   Colores y tipografías del brand kit oficial
+   ============================================ */
+
+:root {
+  /* --- Paleta de colores (brand kit) --- */
+  --black:           #0B0B0B;
+  --black-secondary: #2B2B2B;
+  --gold:            #C6A96B;
+  --gold-hover:      #d4b87a;
+  --gold-dim:        rgba(198, 169, 107, 0.15);
+  --cream:           #F5F1EA;
+  --gray:            #D8D2C8;
+  --white:           #FFFFFF;
+
+  /* --- Tipografías --- */
+  --font-title:  'Playfair Display', serif;   /* Títulos UÑA */
+  --font-script: 'Pinyon Script', cursive;    /* PEZUÑA estilo brush */
+  --font-body:   'Montserrat', sans-serif;    /* Texto general */
+
+  /* --- Espaciado --- */
+  --nav-height: 90px;
+  --section-padding: clamp(60px, 10vw, 120px);
+  --container-max: 1280px;
+  --container-padding: clamp(20px, 5vw, 80px);
+
+  /* --- Transiciones --- */
+  --ease: cubic-bezier(0.4, 0, 0.2, 1);
+  --duration: 0.3s;
+}
+
+/* --- Reset --- */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--black);
+  color: var(--cream);
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+  transition: color var(--duration) var(--ease);
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  background: none;
+  font-family: var(--font-body);
+}
+
+/* --- Contenedor global --- */
+.container {
+  width: 100%;
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: 0 var(--container-padding);
+}
+
+/* --- Componentes reutilizables --- */
+
+/* Botón principal dorado */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 32px;
+  background: transparent;
+  border: 1px solid var(--gold);
+  color: var(--gold);
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  transition: background var(--duration) var(--ease),
+              color var(--duration) var(--ease),
+              transform var(--duration) var(--ease);
+}
+
+.btn-primary:hover {
+  background: var(--gold);
+  color: var(--black);
+  transform: translateY(-1px);
+}
+
+/* Línea decorativa dorada */
+.gold-line {
+  width: 60px;
+  height: 1px;
+  background: var(--gold);
+  display: block;
+}
+
+/* Etiqueta de sección (texto pequeño dorado) */
+.section-label {
+  font-family: var(--font-body);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+/* Título de sección */
+.section-title {
+  font-family: var(--font-title);
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  font-weight: 700;
+  color: var(--cream);
+  line-height: 1.1;
+}
+
+/* Scrollbar personalizada */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--black);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--gold);
+  border-radius: 3px;
+}
+
+/* Selección de texto */
+::selection {
+  background: var(--gold);
+  color: var(--black);
+}

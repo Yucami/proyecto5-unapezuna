@@ -1,0 +1,59 @@
+/* ── página ── */
+.page { background: var(--black); min-height: 100vh; }
+
+/* ── hero ── */
+.hero { position: relative; min-height: 60vh; display: flex; align-items: flex-end; padding-top: calc(var(--nav-height) + 28px); overflow: hidden; }
+.heroBg { position: absolute; inset: 0; background: radial-gradient(ellipse 70% 60% at 60% 40%, rgba(198,169,107,0.07) 0%, transparent 70%); pointer-events: none; }
+.heroInner { max-width: var(--container-max); margin: 0 auto; padding: 0 var(--container-padding) clamp(48px, 8vw, 96px); width: 100%; position: relative; z-index: 1; }
+.overline { font-family: var(--font-body); font-size: 0.7rem; font-weight: 700; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); display: block; margin-bottom: 20px; }
+.headline { font-family: var(--font-title); font-size: clamp(2.8rem, 7vw, 6rem); font-weight: 900; color: var(--cream); line-height: 0.95; letter-spacing: -0.02em; }
+.headlineEm { font-style: italic; color: var(--gold); display: block; }
+
+/* ── inner ── */
+.inner { max-width: var(--container-max); margin: 0 auto; padding: 0 var(--container-padding); }
+
+/* ── texto + contador ── */
+.textoSection { padding: clamp(60px, 8vw, 100px) 0; border-top: 1px solid rgba(198,169,107,0.12); }
+.textoCols { display: grid; grid-template-columns: 1fr 280px; gap: 80px; align-items: start; }
+.textoBloque { display: flex; flex-direction: column; gap: 24px; }
+.parrafo { font-family: var(--font-body); font-size: clamp(0.95rem, 1.5vw, 1.1rem); color: var(--gray); line-height: 1.8; font-weight: 300; }
+.highlight { color: var(--cream); font-weight: 500; }
+.parrafoCierre { color: var(--gold); font-style: italic; font-size: clamp(1rem, 1.8vw, 1.2rem); font-weight: 400; margin-top: 8px; }
+
+/* ── contador ── */
+.contadorWrap { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 12px; position: sticky; top: calc(var(--nav-height) + 40px); padding: 40px 0; }
+.contadorNum { font-family: var(--font-title); font-size: clamp(3.5rem, 6vw, 5.5rem); font-weight: 900; color: var(--gold); line-height: 1; letter-spacing: -0.02em; }
+.contadorLabel { font-family: var(--font-body); font-size: 0.72rem; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gray); line-height: 1.5; }
+.contadorLinea { width: 1px; height: 60px; background: linear-gradient(to bottom, var(--gold), transparent); margin-top: 8px; }
+
+/* ── valores ── */
+.valoresSection { padding: clamp(60px, 8vw, 100px) 0; background: var(--black-secondary); }
+.sectionLabel { font-family: var(--font-body); font-size: 0.65rem; font-weight: 700; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); display: block; margin-bottom: 48px; }
+.valoresGrid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; background: rgba(198,169,107,0.08); }
+.valorCard { background: var(--black-secondary); padding: 48px 36px; display: flex; flex-direction: column; gap: 14px; position: relative; opacity: 0; transform: translateY(20px); transition: opacity 0.5s var(--ease), transform 0.5s var(--ease); transition-delay: var(--delay, 0s); }
+.valoresVisible .valorCard { opacity: 1; transform: translateY(0); }
+.valorNum { font-family: var(--font-body); font-size: 0.62rem; font-weight: 700; letter-spacing: 0.2em; color: rgba(198,169,107,0.4); }
+.valorPalabra { font-family: var(--font-title); font-size: clamp(1.4rem, 2.5vw, 2rem); font-weight: 900; color: var(--cream); line-height: 1; }
+.valorDesc { font-family: var(--font-body); font-size: 0.82rem; color: var(--gray); line-height: 1.7; font-weight: 300; flex: 1; }
+.valorLinea { height: 2px; width: 32px; background: var(--gold); opacity: 0.4; margin-top: 8px; transition: width 0.4s var(--ease), opacity var(--duration); }
+.valorCard:hover .valorLinea { width: 100%; opacity: 1; }
+
+/* ── cta final ── */
+.ctaSection { padding: clamp(80px, 12vw, 140px) 0; text-align: center; }
+.ctaSection .inner { display: flex; flex-direction: column; align-items: center; gap: 36px; }
+.ctaPregunta { font-family: var(--font-title); font-size: clamp(1.8rem, 4vw, 3rem); font-weight: 700; color: var(--cream); font-style: italic; }
+.ctaBtn { display: inline-flex; align-items: center; gap: 12px; padding: 16px 40px; border: 1px solid var(--gold); background: transparent; color: var(--gold); font-family: var(--font-body); font-size: 0.72rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; cursor: pointer; transition: background var(--duration) var(--ease), color var(--duration) var(--ease), transform 0.2s var(--ease); }
+.ctaBtn:hover { background: var(--gold); color: var(--black); transform: translateY(-2px); }
+.ctaArrow { transition: transform var(--duration) var(--ease); }
+.ctaBtn:hover .ctaArrow { transform: translateX(4px); }
+
+/* ── responsive ── */
+@media (max-width: 900px) {
+  .textoCols { grid-template-columns: 1fr; gap: 48px; }
+  .contadorWrap { position: static; flex-direction: row; justify-content: flex-start; gap: 24px; padding: 0; }
+  .contadorLinea { display: none; }
+  .valoresGrid { grid-template-columns: 1fr; }
+}
+@media (max-width: 480px) {
+  .contadorWrap { flex-direction: column; align-items: flex-start; }
+}

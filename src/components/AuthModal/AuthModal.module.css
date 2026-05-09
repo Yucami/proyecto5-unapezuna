@@ -1,0 +1,262 @@
+/* =============================================
+   AuthModal — UñaPezuña
+   ============================================= */
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(6px);
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  animation: fadeIn 0.2s var(--ease);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.modal {
+  background: var(--black-secondary);
+  border: 1px solid rgba(198, 169, 107, 0.2);
+  width: 100%;
+  max-width: 420px;
+  padding: 48px 40px 40px;
+  position: relative;
+  animation: slideUp 0.3s var(--ease);
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Línea dorada superior */
+.modal::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+}
+
+/* Botón cerrar */
+.closeBtn {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--gray);
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: color var(--duration) var(--ease);
+  background: none;
+  border: none;
+}
+
+.closeBtn:hover { color: var(--gold); }
+
+/* Logo decorativo */
+.topDecor {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.logoUna {
+  font-family: var(--font-title);
+  font-size: 0.85rem;
+  font-weight: 900;
+  letter-spacing: 0.15em;
+  color: var(--cream);
+}
+
+.logoPezuna {
+  font-family: var(--font-script);
+  font-size: 1.4rem;
+  color: var(--gold);
+  line-height: 1;
+}
+
+/* Títulos */
+.title {
+  font-family: var(--font-title);
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--cream);
+  text-align: center;
+  margin-bottom: 6px;
+}
+
+.subtitle {
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  color: var(--gray);
+  text-align: center;
+  margin-bottom: 28px;
+  line-height: 1.5;
+}
+
+.subtitle strong { color: var(--gold); }
+
+/* Formulario */
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.field label {
+  font-family: var(--font-body);
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--gray);
+}
+
+.optional {
+  font-weight: 400;
+  text-transform: none;
+  letter-spacing: 0;
+  opacity: 0.6;
+}
+
+.field input {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(198, 169, 107, 0.2);
+  color: var(--cream);
+  font-family: var(--font-body);
+  font-size: 0.88rem;
+  padding: 12px 14px;
+  outline: none;
+  transition: border-color var(--duration) var(--ease),
+              background var(--duration) var(--ease);
+  width: 100%;
+}
+
+.field input::placeholder {
+  color: rgba(216, 210, 200, 0.3);
+}
+
+.field input:focus {
+  border-color: var(--gold);
+  background: rgba(198, 169, 107, 0.05);
+}
+
+/* Input de código de verificación */
+.codeInput {
+  text-align: center !important;
+  font-size: 1.4rem !important;
+  letter-spacing: 0.3em !important;
+  padding: 14px !important;
+}
+
+/* Error / Éxito */
+.error {
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  color: #e07070;
+  text-align: center;
+  padding: 8px 12px;
+  background: rgba(224, 112, 112, 0.08);
+  border: 1px solid rgba(224, 112, 112, 0.2);
+}
+
+.success {
+  color: #7ec88a !important;
+  background: rgba(126, 200, 138, 0.08) !important;
+  border-color: rgba(126, 200, 138, 0.2) !important;
+}
+
+/* Botón submit */
+.submitBtn {
+  width: 100%;
+  padding: 14px;
+  background: transparent;
+  border: 1px solid var(--gold);
+  color: var(--gold);
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  cursor: pointer;
+  margin-top: 4px;
+  transition: background var(--duration) var(--ease),
+              color var(--duration) var(--ease);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+}
+
+.submitBtn:hover:not(:disabled) {
+  background: var(--gold);
+  color: var(--black);
+}
+
+.submitBtn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Spinner */
+.spinner {
+  width: 18px;
+  height: 18px;
+  border: 2px solid rgba(198, 169, 107, 0.3);
+  border-top-color: var(--gold);
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+  display: inline-block;
+}
+
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* Link cambiar step */
+.switchText {
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  color: var(--gray);
+  text-align: center;
+  margin-top: 20px;
+}
+
+.switchText button {
+  color: var(--gold);
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 0.75rem;
+  font-family: var(--font-body);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: opacity var(--duration);
+}
+
+.switchText button:hover { opacity: 0.7; }
+
+/* Responsive */
+@media (max-width: 480px) {
+  .modal {
+    padding: 40px 24px 32px;
+  }
+}

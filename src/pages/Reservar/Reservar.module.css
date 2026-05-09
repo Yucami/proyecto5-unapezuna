@@ -1,0 +1,613 @@
+.page {
+  min-height: 100vh;
+  background: var(--black);
+  padding-top: calc(var(--nav-height) + 48px);
+  padding-bottom: 80px;
+}
+
+.container {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 0 var(--container-padding);
+}
+
+/* Header */
+.header {
+  margin-bottom: 48px;
+}
+
+.label {
+  font-family: var(--font-body);
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--gold);
+  display: block;
+  margin-bottom: 12px;
+}
+
+.title {
+  font-family: var(--font-title);
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 900;
+  color: var(--cream);
+  line-height: 1.05;
+  white-space: pre-line;
+}
+
+/* Indicador de pasos */
+.steps {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  margin-bottom: 48px;
+  border-bottom: 1px solid rgba(198, 169, 107, 0.15);
+  padding-bottom: 32px;
+}
+
+.step {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 1;
+  opacity: 0.35;
+  transition: opacity var(--duration) var(--ease);
+}
+
+.step.stepActive { opacity: 1; }
+.step.stepDone   { opacity: 0.6; }
+
+.stepNum {
+  width: 28px;
+  height: 28px;
+  border: 1px solid rgba(198, 169, 107, 0.4);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-body);
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: var(--gray);
+  flex-shrink: 0;
+}
+
+.stepActive .stepNum {
+  border-color: var(--gold);
+  color: var(--gold);
+  background: rgba(198, 169, 107, 0.08);
+}
+
+.stepDone .stepNum {
+  border-color: var(--gold);
+  color: var(--gold);
+}
+
+.stepLabel {
+  font-family: var(--font-body);
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--gray);
+}
+
+.stepActive .stepLabel { color: var(--cream); }
+
+/* Contenido */
+.content { width: 100%; }
+
+.pasoDesc {
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  color: var(--gray);
+  margin-bottom: 28px;
+}
+
+.pasoWrap {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Resumen previo */
+.resumenPrevio {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 16px 20px;
+  border: 1px solid rgba(198, 169, 107, 0.15);
+  background: rgba(198, 169, 107, 0.04);
+}
+
+.resumenLabel {
+  font-family: var(--font-body);
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+.resumenVal {
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  color: var(--cream);
+}
+
+/* Grid servicios */
+.serviciosGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2px;
+  background: rgba(198, 169, 107, 0.08);
+}
+
+.servicioCard {
+  background: var(--black);
+  padding: 28px 24px;
+  text-align: left;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  transition: background var(--duration) var(--ease);
+  border: none;
+  position: relative;
+  overflow: hidden;
+}
+
+.servicioCard:hover { background: var(--black-secondary); }
+
+.servicioCard:hover .servicioLine { width: 100%; opacity: 1; }
+
+.servicioTop {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.servicioNombre {
+  font-family: var(--font-title);
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--cream);
+}
+
+.fotoBadge {
+  font-family: var(--font-body);
+  font-size: 0.6rem;
+  color: var(--gold);
+  border: 1px solid rgba(198, 169, 107, 0.3);
+  padding: 3px 7px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.servicioDesc {
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  color: var(--gray);
+  line-height: 1.5;
+  flex: 1;
+}
+
+.servicioBottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.servicioDuracion {
+  font-size: 0.68rem;
+  color: rgba(216, 210, 200, 0.45);
+}
+
+.servicioPrecio {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--gold);
+}
+
+.servicioLine {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 2px;
+  width: 32px;
+  background: var(--gold);
+  opacity: 0.4;
+  transition: width 0.4s var(--ease), opacity var(--duration);
+}
+
+/* Fecha */
+.dateInput {
+  width: 100%;
+  max-width: 280px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(198, 169, 107, 0.3);
+  color: var(--cream);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  padding: 14px 16px;
+  outline: none;
+  cursor: pointer;
+  transition: border-color var(--duration) var(--ease);
+}
+
+.dateInput:focus { border-color: var(--gold); }
+
+.dateInput::-webkit-calendar-picker-indicator {
+  filter: invert(0.6) sepia(1) saturate(2) hue-rotate(5deg);
+  cursor: pointer;
+}
+
+.fechaSeleccionada {
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  color: var(--gold);
+  margin-top: -8px;
+}
+
+/* Huecos */
+.horasGrid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.horaBtn {
+  padding: 12px 20px;
+  border: 1px solid rgba(198, 169, 107, 0.25);
+  background: transparent;
+  color: var(--cream);
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: border-color var(--duration) var(--ease),
+              background var(--duration) var(--ease),
+              color var(--duration) var(--ease);
+  letter-spacing: 0.05em;
+}
+
+.horaBtn:hover {
+  border-color: var(--gold);
+  color: var(--gold);
+}
+
+.horaSelected {
+  background: var(--gold) !important;
+  border-color: var(--gold) !important;
+  color: var(--black) !important;
+}
+
+.sinHuecos {
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  color: var(--gray);
+  line-height: 1.6;
+}
+
+/* Botones nav */
+.navBtns {
+  display: flex;
+  gap: 16px;
+  margin-top: 12px;
+  align-items: center;
+}
+
+.btnBack {
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  color: var(--gray);
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: color var(--duration) var(--ease);
+  letter-spacing: 0.08em;
+}
+
+.btnBack:hover { color: var(--cream); }
+
+.btnNext {
+  padding: 14px 32px;
+  border: 1px solid var(--gold);
+  background: transparent;
+  color: var(--gold);
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background var(--duration) var(--ease),
+              color var(--duration) var(--ease);
+}
+
+.btnNext:hover:not(:disabled) {
+  background: var(--gold);
+  color: var(--black);
+}
+
+.btnNext:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+/* Confirmar */
+.resumenBox {
+  border: 1px solid rgba(198, 169, 107, 0.2);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.resumenFila {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(198, 169, 107, 0.08);
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+}
+
+.resumenFila:last-child { border-bottom: none; }
+
+.resumenFila span { color: var(--gray); }
+.resumenFila strong { color: var(--cream); }
+
+.reservaId {
+  font-size: 0.72rem !important;
+  color: var(--gold) !important;
+  letter-spacing: 0.08em;
+}
+
+/* Avisos */
+.aviso {
+  background: rgba(198, 169, 107, 0.08);
+  border: 1px solid rgba(198, 169, 107, 0.25);
+  padding: 14px 16px;
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  color: var(--cream);
+  line-height: 1.5;
+}
+
+.avisoAusencias {
+  background: rgba(224, 112, 112, 0.08);
+  border: 1px solid rgba(224, 112, 112, 0.25);
+  padding: 14px 16px;
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  color: #e07070;
+  line-height: 1.5;
+}
+
+/* Fotos */
+.fotosWrap { display: flex; flex-direction: column; gap: 8px; }
+
+.fotosLabel {
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  color: var(--gray);
+}
+
+.fotoUpload {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 24px;
+  border: 1px dashed rgba(198, 169, 107, 0.4);
+  color: var(--gold);
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  cursor: pointer;
+  transition: border-color var(--duration) var(--ease),
+              background var(--duration) var(--ease);
+  max-width: 280px;
+}
+
+.fotoUpload:hover {
+  border-color: var(--gold);
+  background: rgba(198, 169, 107, 0.05);
+}
+
+/* Botón confirmar */
+.btnConfirmar {
+  padding: 16px 40px;
+  background: var(--gold);
+  border: 1px solid var(--gold);
+  color: var(--black);
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: opacity var(--duration) var(--ease);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 180px;
+  min-height: 50px;
+}
+
+.btnConfirmar:hover:not(:disabled) { opacity: 0.85; }
+.btnConfirmar:disabled { opacity: 0.4; cursor: not-allowed; }
+
+/* Spinner */
+.spinner {
+  width: 32px;
+  height: 32px;
+  border: 2px solid rgba(198, 169, 107, 0.2);
+  border-top-color: var(--gold);
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+  margin: 32px auto;
+  display: block;
+}
+
+.spinnerInline {
+  width: 18px;
+  height: 18px;
+  border: 2px solid rgba(0,0,0,0.2);
+  border-top-color: var(--black);
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+  display: inline-block;
+}
+
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* Error */
+.error {
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  color: #e07070;
+  padding: 12px 16px;
+  background: rgba(224, 112, 112, 0.08);
+  border: 1px solid rgba(224, 112, 112, 0.2);
+}
+
+/* Éxito */
+.exitoWrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 20px;
+  padding: 40px 0;
+}
+
+.exitoIcon { font-size: 3rem; }
+
+.exitoTitle {
+  font-family: var(--font-title);
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--cream);
+}
+
+.exitoDesc {
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  color: var(--gray);
+  max-width: 360px;
+}
+
+.exitoNota {
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  color: rgba(216, 210, 200, 0.45);
+  max-width: 380px;
+}
+
+.btnNueva {
+  padding: 14px 32px;
+  border: 1px solid var(--gold);
+  background: transparent;
+  color: var(--gold);
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  cursor: pointer;
+  margin-top: 8px;
+  transition: background var(--duration) var(--ease),
+              color var(--duration) var(--ease);
+}
+
+.btnNueva:hover {
+  background: var(--gold);
+  color: var(--black);
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .serviciosGrid { grid-template-columns: 1fr; }
+  .steps { gap: 4px; }
+  .stepLabel { display: none; }
+}
+
+/* ── calendario de disponibilidad (PasoFecha) ── */
+.calHeader  { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.calNav     { width: 34px; height: 34px; display: flex; align-items: center; justify-content: center; background: none; border: 1px solid rgba(198,169,107,0.2); color: var(--gold); font-size: 0.85rem; cursor: pointer; transition: background var(--duration) var(--ease), border-color var(--duration) var(--ease); flex-shrink: 0; }
+.calNav:hover    { background: rgba(198,169,107,0.08); border-color: var(--gold); }
+.calNav:disabled { opacity: 0.25; cursor: not-allowed; }
+.calMes     { font-family: var(--font-title); font-size: 1.05rem; font-weight: 700; color: var(--cream); display: flex; align-items: center; gap: 8px; }
+.calSpinner { width: 11px; height: 11px; border: 1.5px solid rgba(198,169,107,0.3); border-top-color: var(--gold); border-radius: 50%; animation: spin 0.7s linear infinite; display: inline-block; }
+
+.leyenda    { display: flex; gap: 16px; flex-wrap: wrap; }
+.leyItem    { display: flex; align-items: center; gap: 6px; font-family: var(--font-body); font-size: 0.65rem; color: var(--gray); }
+.leyDot     { width: 9px; height: 9px; border-radius: 50%; display: inline-block; flex-shrink: 0; font-style: normal; }
+.dotVerde   { background: rgba(126,200,138,0.85); }
+.dotRojo    { background: rgba(224,112,112,0.85); }
+
+.calGrid    { display: grid; grid-template-columns: repeat(7, 1fr); gap: 3px; }
+.calDiaSem  { font-family: var(--font-body); font-size: 0.58rem; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; color: var(--gray); text-align: center; padding: 8px 0 10px; opacity: 0.4; }
+
+.calDia {
+  aspect-ratio: 1 / 1.1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: 1px solid transparent;
+  cursor: default;
+  transition: border-color var(--duration) var(--ease), background var(--duration) var(--ease);
+  padding: 2px;
+}
+.calDia:disabled          { opacity: 0.2; }
+.calDia:not(:disabled)    { cursor: pointer; }
+.calDia:not(:disabled):hover { border-color: rgba(198,169,107,0.3); background: rgba(198,169,107,0.04); }
+
+.calNum  { font-family: var(--font-body); font-size: 0.78rem; font-weight: 600; color: var(--cream); }
+
+.diaVerde   { background: rgba(126,200,138,0.1) !important; border-color: rgba(126,200,138,0.25) !important; }
+.diaVerde .calNum { color: #a3d9ab; }
+.diaVerde:not(:disabled):hover { background: rgba(126,200,138,0.18) !important; }
+
+.diaRojo    { background: rgba(224,112,112,0.08) !important; border-color: rgba(224,112,112,0.18) !important; }
+.diaRojo .calNum { color: #c07070; }
+
+.diaBloq    { opacity: 0.15; }
+.diaHoy .calNum { color: var(--gold); font-weight: 700; }
+.diaHoy     { border-color: rgba(198,169,107,0.4) !important; }
+.diaSel     { border-color: var(--gold) !important; background: rgba(198,169,107,0.12) !important; }
+.diaSel .calNum { color: var(--gold); font-weight: 700; }
+
+/* ── admin: días sin agenda en calendario ── */
+.diaSinAgendaAdmin { opacity: 0.4; border: 1px dashed rgba(198,169,107,0.2) !important; }
+.diaSinAgendaAdmin:not(:disabled) { opacity: 0.6; cursor: pointer; }
+.diaSinAgendaAdmin:not(:disabled):hover { opacity: 1; border-color: rgba(198,169,107,0.4) !important; }
+
+/* ── admin: campos de contacto manual ── */
+.adminContacto     { display: flex; flex-direction: column; gap: 14px; padding: 20px; border: 1px solid rgba(198,169,107,0.2); background: rgba(198,169,107,0.03); }
+.adminContactoLbl  { font-family: var(--font-body); font-size: 0.6rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); }
+.adminField        { display: flex; flex-direction: column; gap: 6px; }
+.fieldLbl          { font-family: var(--font-body); font-size: 0.62rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gray); }
+.adminInputRow     { display: flex; gap: 8px; }
+.adminInput        { flex: 1; background: rgba(255,255,255,0.04); border: 1px solid rgba(198,169,107,0.2); color: var(--cream); font-family: var(--font-body); font-size: 0.85rem; padding: 10px 14px; outline: none; transition: border-color var(--duration) var(--ease); }
+.adminInput:focus  { border-color: var(--gold); }
+.adminInput::placeholder { color: rgba(216,210,200,0.3); }
+.btnBuscar         { padding: 10px 18px; border: 1px solid rgba(198,169,107,0.3); background: transparent; color: var(--gold); font-family: var(--font-body); font-size: 0.65rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer; transition: background var(--duration) var(--ease); white-space: nowrap; display: flex; align-items: center; justify-content: center; min-width: 70px; }
+.btnBuscar:hover:not(:disabled) { background: rgba(198,169,107,0.08); }
+.btnBuscar:disabled { opacity: 0.3; cursor: not-allowed; }
+.clienteEncontrado   { font-family: var(--font-body); font-size: 0.75rem; color: #7ec88a; padding: 10px 14px; background: rgba(126,200,138,0.08); border: 1px solid rgba(126,200,138,0.2); }
+.clienteNoEncontrado { font-family: var(--font-body); font-size: 0.75rem; color: var(--gold); padding: 10px 14px; background: rgba(198,169,107,0.08); border: 1px solid rgba(198,169,107,0.2); }
+
+/* ── navegación por año (admin) ── */
+.calAñoNav     { display: flex; align-items: center; justify-content: center; gap: 20px; padding: 4px 0; }
+.calNavAño     { background: none; border: none; color: rgba(198,169,107,0.5); font-family: var(--font-body); font-size: 0.7rem; font-weight: 600; letter-spacing: 0.08em; cursor: pointer; transition: color var(--duration) var(--ease); padding: 4px 8px; }
+.calNavAño:hover { color: var(--gold); }
+.calAñoActual  { font-family: var(--font-body); font-size: 0.72rem; font-weight: 700; color: rgba(198,169,107,0.3); letter-spacing: 0.1em; }
