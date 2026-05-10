@@ -37,28 +37,15 @@
   display: grid;
   grid-template-columns: 1.4fr 1fr 1fr 1.2fr;
   gap: 48px;
+  align-items: center;
 }
 
 /* Logo en footer */
-.logoBlock {
-  display: flex;
-  flex-direction: column;
-  line-height: 1;
+.logoImg {
+  width: 220px;
+  height: auto;
+  display: block;
   margin-bottom: 16px;
-}
-
-.logoUna {
-  font-family: var(--font-title);
-  font-size: 1rem;
-  font-weight: 900;
-  letter-spacing: 0.12em;
-  color: var(--cream);
-}
-
-.logoPezuna {
-  font-family: var(--font-script);
-  font-size: 1.4rem;
-  color: var(--gold);
 }
 
 .taglineText {
@@ -124,6 +111,15 @@
   .inner {
     grid-template-columns: 1fr 1fr;
     gap: 40px;
+    text-align: center;
+    justify-items: center;
+  }
+    .footerNav {
+    align-items: center;
+  }
+
+  .footerCta {
+    text-align: center;
   }
 }
 

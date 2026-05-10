@@ -20,12 +20,7 @@ export default function Footer() {
 
           {/* Col 1: marca */}
           <div className={styles.col}>
-            <div className={styles.logoBlock}>
-              <span className={styles.logoUna}>UÑA</span>
-              <span className={styles.logoPezuna}>Pezuña</span>
-            </div>
-            <p className={styles.taglineText}>Nails sin reglas.</p>
-            <p className={styles.location}>Madrid · España</p>
+            <img src="/logo-navbar-transparente.png" alt="UñaPezuña" className={styles.logoImg} />
           </div>
 
           {/* Col 2: navegación — TODO: /disenos y /contacto sin Route en App.jsx */}

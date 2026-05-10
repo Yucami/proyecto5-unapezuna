@@ -29,3 +29,4 @@ dist-ssr
 # Documentación interna
 SETUP.md
 EOF
+*.bak

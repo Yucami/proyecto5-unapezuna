@@ -217,6 +217,9 @@
 @media (max-width: 768px) {
   .navLinks, .socials, .ctaBtn { display: none; }
   .hamburger { display: flex; }
+  .userName { display: none; }
+  .logoutBtn { display: none; }
+  .adminLink { padding: 6px 8px; font-size: 0.6rem; }
 }
 
 /* Usuario logueado */
