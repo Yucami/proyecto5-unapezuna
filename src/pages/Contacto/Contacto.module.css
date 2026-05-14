@@ -56,3 +56,49 @@
 .datoLink:hover {
   text-decoration: underline;
 }
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+  max-width: 480px;
+  margin-top: 16px;
+}
+
+.input, .textarea {
+  width: 100%;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(198,169,107,0.3);
+  color: #F5F1EA;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.85rem;
+  padding: 14px 16px;
+  outline: none;
+  transition: border-color 0.3s;
+}
+
+.input:focus, .textarea:focus {
+  border-color: #C6A96B;
+}
+
+.textarea { resize: vertical; }
+
+.btn {
+  padding: 14px;
+  border: 1px solid #C6A96B;
+  background: transparent;
+  color: #C6A96B;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 0.3s, color 0.3s;
+}
+
+.btn:hover:not(:disabled) { background: #C6A96B; color: #0B0B0B; }
+.btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+.ok    { font-size: 0.82rem; color: #7ec88a; }
+.error { font-size: 0.82rem; color: #e07070; }
