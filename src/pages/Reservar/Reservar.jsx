@@ -89,7 +89,7 @@ export default function Reservar() {
   useEffect(() => {
     if (!fecha) return
     const cargar = async () => {
-      setLoading(true); setHuecos([]); setHora(null); setError('')
+      setLoading(true); setHuecos([]); if (!presel.horaPresel) setHora(null); setError('')
       try {
         if (!API_URL) { setHuecos(HUECOS_FALLBACK); setLoading(false); return }
         const res  = await fetch(`${API_URL}/disponibilidad?fecha=${fecha}`)
@@ -141,7 +141,7 @@ export default function Reservar() {
             adminReserva:     true,
             contactoManual,
             clienteIdForzado: clienteEncontrado?.encontrado
-              ? clienteEncontrado.cliente.clienteId
+              ? clienteEncontrado.clienteId
               : undefined
           })
         })
@@ -189,7 +189,7 @@ export default function Reservar() {
               onSelect={s => {
                 setServicio(s)
                 // Si viene con fecha preseleccionada (desde admin), salta directo a confirmar
-                setPaso(presel.fechaPresel ? PASO.CONFIRMAR : PASO.FECHA)
+                setPaso((presel.fechaPresel && presel.horaPresel) ? PASO.CONFIRMAR : presel.fechaPresel ? PASO.HORA : PASO.FECHA)
               }} />
           )}
           {paso === PASO.FECHA && (
@@ -535,7 +535,7 @@ function PasoConfirmar({ servicio, fecha, hora, fotos, onFotos, loading, error,
             <div className={clienteEncontrado.encontrado
               ? styles.clienteEncontrado : styles.clienteNoEncontrado}>
               {clienteEncontrado.encontrado
-                ? `✅ Clienta encontrada: ${clienteEncontrado.cliente.nombre} — la cita se añadirá a su historial`
+                ? `✅ Clienta encontrada: ${clienteEncontrado.nombre} — la cita se añadirá a su historial`
                 : '⚠️ Sin perfil — la cita se guardará sin vincular a ninguna cuenta'}
             </div>
           )}
